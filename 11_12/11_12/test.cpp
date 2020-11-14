@@ -2,8 +2,8 @@
 #include<stdio.h>
 #include<stdlib.h> 
 #include<time.h>
-/*int game()
-{
+int game()
+{                             
 	srand(time(NULL)); //取当前系统的时间做随机数的种子
 	int num = rand() % 100;   //大于100的数字最后都会被取余下来成0~99的数字
 	while (1)
