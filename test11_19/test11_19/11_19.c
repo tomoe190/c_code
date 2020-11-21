@@ -1,11 +1,53 @@
-#define _CRT_SECURE_NO_WARNINGS
+ï»¿#define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
 #include<stdlib.h>
-
-//µİ¹éºÍ·Çµİ¹é·Ö±ğÊµÏÖÇóµÚn¸öì³²¨ÄÇÆõÊı
-int fibonacci(int n)
+#include<string.h>
+void BubbleSort(int ar[], size_t size)
 {
-	int fac[1024] = { 1, 1,1 };
+	int isChange = 0;
+	for (size_t i = 0; i < size - 1; i++)
+	{
+		for (size_t j=0; j < size-i - 1; j++)
+		{
+			if (ar[j]>ar[j-1])
+			{
+				int tmp=ar[j];
+				ar[j] = ar[j-1];
+				ar[j-1] = tmp;
+				isChange = 1;
+			}
+		}
+		if (!isChange)
+			return;
+	}
+}
+int main()
+{
+	int ar[10] = { 12, 4, 5, 1, 6, 7, 84, 45, 21 };
+	printf("%d ", ar[10], 10);
+	return 0;
+}
+
+
+//é€’å½’å’Œéé€’å½’åˆ†åˆ«å®ç°æ±‚ç¬¬nä¸ªæ–æ³¢é‚£å¥‘æ•°
+//é€’å½’
+/*int fibonacci(int n)
+{
+	if (n <= 2)
+	{
+		return 1;
+	}
+	return fibonacci(n - 1) + fibonacci(n - 2);
+}
+int main()
+{
+	printf("%d\n",fibonacci(7));
+	return 0;
+}*/
+//éé€’å½’
+/*int fibonacci(int n)
+{
+	int fac[1024] = { 0,1,1};
 	for (int i = 3; i <= n; i++)
 	{
 		fac[i] = fac[i - 1] + fac[i - 2];
@@ -14,13 +56,15 @@ int fibonacci(int n)
 }
 int main()
 {
-	printf("%d\n", fibonacci(3));
+	int n = 0;
+	printf("è¯·è¾“å…¥nï¼š");
+	scanf("%d",&n);
+	printf("%d\n", fibonacci(n));
 	return 0;
-}
+}*/
 
 
-
-//±àĞ´Ò»¸öº¯ÊıÊµÏÖnµÄk´Î·½£¬Ê¹ÓÃµİ¹éÊµÏÖ
+//ç¼–å†™ä¸€ä¸ªå‡½æ•°å®ç°nçš„kæ¬¡æ–¹ï¼Œä½¿ç”¨é€’å½’å®ç°
 /*int mypow(int n,int k)
 {
 	if (k == 0)
@@ -38,10 +82,11 @@ int main()
 	printf("%d\n", mypow(2,6));
 
 	return 0;
-}
+}*/
 
 
-//Ğ´Ò»¸öµİ¹éº¯ÊıDigitSum(n),ÊäÈëÒ»¸ö·Ç¸ºÕûÊı£¬·µ»Ø×é»òËüµÄÊı×ÖÖ®ºÍ
+
+//å†™ä¸€ä¸ªé€’å½’å‡½æ•°DigitSum(n),è¾“å…¥ä¸€ä¸ªéè´Ÿæ•´æ•°ï¼Œè¿”å›ç»„æˆå®ƒçš„æ•°å­—ä¹‹å’Œ
 /*int DigitSum(int n)
 {
 	int num = n % 10;
@@ -55,10 +100,13 @@ int main()
 {
 	printf("%d\n", DigitSum(6789));
 	return 0;
-}
+}*/
 
-//±àĞ´Ò»¸öº¯Êıreverse_string(char *string)(µİ¹éÊµÏÖ£©
-//·Çµİ¹é
+
+
+
+//ç¼–å†™ä¸€ä¸ªå‡½æ•°reverse_string(char *string)(é€’å½’å®ç°ï¼‰
+//éé€’å½’
 /*char *reverse_string(char *string)
 {
 	char *start = string;
@@ -76,8 +124,8 @@ int main()
 	char buf[] = "nihao";
 	printf("%s\n", reverse_string(buf));
 	return 0;
-}*/
-//µİ¹é
+}
+//é€’å½’
 /*char *reverse_string(char *string)
 {
 	if (strlen(string)<2)
@@ -85,8 +133,8 @@ int main()
 		return string;
 	}
 	int len = strlen(string) - 1;
-	char ch = *string;             //±£´æÊ××Ö·û
-	*string = *(string + len);//½«Ä©Î²×Ö·û¸³Öµ¸øÊ××Ö½Ú¿Õ¼ä
+	char ch = *string;             //ä¿å­˜é¦–å­—ç¬¦
+	*string = *(string + len);//å°†æœ«å°¾å­—ç¬¦èµ‹å€¼ç»™é¦–å­—èŠ‚ç©ºé—´
 	*(string + strlen(string) - 1) = '\0';
 	reverse_string(string + 1);
 
@@ -99,16 +147,37 @@ int main()
 	char buf[] = "nihao";
 	printf("%s\n", reverse_string(buf));
 	return 0;
-} 
+}*/
+/*char *reverse_string(char *string)
+{	if (strlen(string) <2)
+	{
+		return string;
+	}
+	int len = strlen(string) - 1;      //å­—ç¬¦é•¿åº¦ä¼šå˜ï¼Œè¦å›ºå®šä¸€ä¸ªé•¿åº¦
+	char ch = *string;  //ä¿å­˜é¦–å­—ç¬¦
+	*string = *(string + strlen(string) - 1);    //å°†æœ«å°¾å­—ç¬¦èµ‹å€¼ç»™é¦–å­—èŠ‚ç©ºé—´
+	*(string + strlen(string) - 1) = '\0';
+	reverse_string(string + 1);
 
-//µİ¹éºÍ·Çµİ¹é·Ö±ğÊµÏÖstrlen¡ª¡ªÇó×Ö·û´®µÄ³¤¶È£¨ÆğÊ¼Î»ÖÃµ½\0´¦£©
-//·Çµİ¹é
+	*(string + len) = ch;
+	return string;
+}
+int main()
+{
+	char buf[] = "nihao";
+	printf("%s\n", reverse_string(buf));
+	return 0;
+}*/
+
+
+//é€’å½’å’Œéé€’å½’åˆ†åˆ«å®ç°strlenâ€”â€”æ±‚å­—ç¬¦ä¸²çš„é•¿åº¦ï¼ˆèµ·å§‹ä½ç½®åˆ°\0å¤„ï¼‰
+//éé€’å½’
 /*int mystrlen(char *str)
 {
 	int count = 0;
 	while (*str != '\0')
 	{
-		str++;                   //Íùºó×ßÒ»¸öËùÖ¸ÔªËØ
+		str++;                   //å¾€åèµ°ä¸€ä¸ªæ‰€æŒ‡å…ƒç´ 
 		count++;
 	}
 	return count;
@@ -118,7 +187,7 @@ int main()
 	printf("%d\n",mystrlen("nihao"));
 	return 0;
 }
-//µİ¹é
+//é€’å½’
 int mystrlen(char *str)
 {
 	if (*str == '\0')
@@ -126,12 +195,26 @@ int mystrlen(char *str)
 		return 0;
 	}
 	return 1 + mystrlen(str + 1);
+}*/
+/*int mystrlen(char *str)
+{
+	int count = 0;
+	while (*str != '\0')
+	{
+		str++;
+		count++;
+	}
+	return count;
 }
+int main()
+{
+	printf("%d ", mystrlen("nihao"));
+	return 0;
+}*/
 
 
-
-//µİ¹éºÍ·Çµİ¹é·Ö±ğÊµÏÖÇónµÄ½×³Ë£¨²»¿¼ÂÇÒç³öµÄÎÊÌâ£©
-//·Çµİ¹é
+//é€’å½’å’Œéé€’å½’åˆ†åˆ«å®ç°æ±‚nçš„é˜¶ä¹˜ï¼ˆä¸è€ƒè™‘æº¢å‡ºçš„é—®é¢˜ï¼‰
+//éé€’å½’
 /*int factorial(int n)
 {
 	int fac = 1;
@@ -145,7 +228,7 @@ int mystrlen(char *str)
 {
 	printf("%d\n", factorial(5));
 }
-//µİ¹é
+//é€’å½’
 int factorial(int n)
 {
 	if (n == 1)
@@ -153,17 +236,35 @@ int factorial(int n)
 		return 1;
 	}
 	return n*factorial(n - 1);
+}*/
+
+
+
+
+/*int factorial(int n)
+{
+	int fac = 1;
+	for (int i = 1; i <= n; i++)
+	{
+		fac *= i;
+	}
+	return fac;
 }
+int main()
+{
+	printf("%d ", factorial(4));
+	return 0;
+}*/
 
 
-//µİ¹é·½Ê½ÊµÏÖ´òÓ¡Ò»¸öÕûÊıµÄÃ¿Ò»Î»
-//Ã¿´Î´òÓ¡Êı×ÖµÄ¸öÎ»Êı£¬´òÓ¡Ö®ºó£¬³ıÒÔ10£¬È»ºóÏÂ´Î³ıºóµÄÊı×ÖµÄ¸öÎ»Êı
+//é€’å½’æ–¹å¼å®ç°æ‰“å°ä¸€ä¸ªæ•´æ•°çš„æ¯ä¸€ä½
+//æ¯æ¬¡æ‰“å°æ•°å­—çš„ä¸ªä½æ•°ï¼Œæ‰“å°ä¹‹åï¼Œé™¤ä»¥10ï¼Œç„¶åä¸‹æ¬¡é™¤åçš„æ•°å­—çš„ä¸ªä½æ•°
 /*void print(int num)
 {
 	printf("%d ", num % 10);
 	if (num < 10)
 	{
-		return;                //ÍË³öÕâ¸öº¯Êı
+		return;                //é€€å‡ºè¿™ä¸ªå‡½æ•°
 	}
 	print(num / 10);
 }
@@ -172,7 +273,7 @@ int main()
 	print(6789);
 	return 0;
 }*/
-//´òÓ¡³öÊÇ£º9876
+//æ‰“å°å‡ºæ˜¯ï¼š9876
 /*void print(int num)
 {
 	if (num < 10)
@@ -187,10 +288,38 @@ int main()
 {
 	print(6789);
 	return 0;
-}
-//´òÓ¡³öÊÇ£º6789
+}*/
+//æ‰“å°å‡ºæ˜¯ï¼š6789
 
-//ÊµÏÖÒ»¸öº¯Êı£¬´òÓ¡³Ë·¨¿Ú¾÷±í£¬¿Ú¾÷±íµÄĞĞÊıºÍÁĞÊı×Ô¼º¾ö¶¨
+/*void print(int num)
+{
+	if (num < 10)
+	{
+		printf("%d ", num % 10);
+		return;
+	}
+	print(num / 10);
+	printf("%d ", num % 10);
+}*/
+
+/*void print(int num)
+{
+	if (num < 10)
+	{
+		printf("%d ", num%10);
+		return;
+	}
+	print(num / 10);
+	printf("%d ", num % 10);
+}
+int main()
+{
+	print(12345);
+	return 0;
+}
+
+
+//å®ç°ä¸€ä¸ªå‡½æ•°ï¼Œæ‰“å°ä¹˜æ³•å£è¯€è¡¨ï¼Œå£è¯€è¡¨çš„è¡Œæ•°å’Œåˆ—æ•°è‡ªå·±å†³å®š
 /*void multiplication_table(int n)
 {
 	for (int i = 1; i <= n; i++)
@@ -206,9 +335,28 @@ int main()
 {
 	multiplication_table(10);
 	return 0;
+}*/
+
+/*void multiplication_table(int n)
+{
+	for (int i; i <= n; i++)
+	{
+		for (int j; j <= i; j++)
+		{
+			printf("%d*%d=%d\t", i, j, i*j);
+		}
+		printf("\n");
+	}
+}
+int main()
+{
+	multiplication_table(12);
+	return 0;
 }
 
-//½»»»Á½¸öÊı
+
+
+//äº¤æ¢ä¸¤ä¸ªæ•°
 /*void myswap(int *num1, int *num2)
 {
 	int tmp = *num1;
@@ -225,7 +373,7 @@ int main()
 	return 0;
 }
 
-//Êä³ö1000~2000¼äµÄÈòÄê                        ÓĞÎÊÌâ
+//è¾“å‡º1000~2000é—´çš„é—°å¹´                        æœ‰é—®é¢˜
 /*int is_leap_year(int year)
 {
 	
@@ -249,7 +397,7 @@ int main()
 }
 
 
-//ÊµÏÖÒ»¸öº¯Êı£¬ÅĞ¶ÏÒ»¸öÊıÊÇ²»ÊÇËØÊı(º¯Êı·â×°£©        ÓĞÎÊÌâ
+//å®ç°ä¸€ä¸ªå‡½æ•°ï¼Œåˆ¤æ–­ä¸€ä¸ªæ•°æ˜¯ä¸æ˜¯ç´ æ•°(å‡½æ•°å°è£…ï¼‰        æœ‰é—®é¢˜
 /*int is_prime(int num)
 {
 	int i=0;
@@ -278,7 +426,7 @@ void main()
 }*/
 
 
-//¶ş·Ö²éÕÒ£¨º¯Êı·â×°£©
+//äºŒåˆ†æŸ¥æ‰¾ï¼ˆå‡½æ•°å°è£…ï¼‰
 /*int binary_search(int ar[10], int size, int num)
 {
 	int idx_start = 0;
@@ -300,23 +448,23 @@ void main()
 			idx_start = idx_mid + 1;
 		}
 	}
-	printf("²éÕÒµÄÊı²»´æÔÚ...\n");
+	printf("æŸ¥æ‰¾çš„æ•°ä¸å­˜åœ¨...\n");
 	return -1;
 }
 
 int main()
 {
 	int ar[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-	printf("6µÄÏÂ±êÊÇ%d\n",binary_search(ar, 10, 6));
+	printf("6çš„ä¸‹æ ‡æ˜¯%d\n",binary_search(ar, 10, 6));
 	return 0;
 }
 
-//¶ş·Ö²éÕÒ
+//äºŒåˆ†æŸ¥æ‰¾
 /*int main()
 {
 	int ar[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 	int key;
-	printf("ÇëÊäÈëÒ»¸öÊı£º");
+	printf("è¯·è¾“å…¥ä¸€ä¸ªæ•°ï¼š");
 	scanf("%d", &key);
 	int low = 0;
 	int high = sizeof(ar) / sizeof(ar[0])-1;
@@ -326,7 +474,7 @@ int main()
 		int mid = (low + high) / 2;
 		if (key == ar[mid])
 		{
-			printf("Êı%dÔÚÎ»ÖÃ%d\n",key,mid);
+			printf("æ•°%dåœ¨ä½ç½®%d\n",key,mid);
 			break;
 		}
 		else if (key < ar[mid])
@@ -339,6 +487,6 @@ int main()
 		}
 	}
 	if (low > high)
-		printf("²éÕÒµÄÊı²»´æÔÚ...\n");
+		printf("æŸ¥æ‰¾çš„æ•°ä¸å­˜åœ¨...\n");
 	return 0;
 }*/
